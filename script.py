@@ -14,8 +14,8 @@ def connectToRouter():
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         print(f"Connecting to router {router_ip}...")
-        ssh.connect(hostname=router_ip, username=username, password=password, port=3080, timeout=10)
-
+        ssh.connect(hostname=router_ip, username=username, password=password, port=port, timeout=10)
+        print("✅ Connected!")
         session = ssh.invoke_shell()
         commands = [
             b"enable\n",
