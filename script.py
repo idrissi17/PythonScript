@@ -2,19 +2,13 @@ import time
 import paramiko
 
 
-def connectToRouter():
-    router_ip = "192.168.10.1"
-    username = "admin"
-    password = "cisco"
-    enable_secret = "cisco"
-    port = 3080
-
+def connectToRouter(ip, username, password, port, enable_secret):
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-        print(f"Connecting to router {router_ip}...")
-        ssh.connect(hostname=router_ip, username=username, password=password, port=port, timeout=10)
+        print(f"Connecting to router {ip}...")
+        ssh.connect(hostname=ip, username=username, password=password, port=port, timeout=10)
         print("✅ Connected!")
         session = ssh.invoke_shell()
         commands = [
@@ -40,4 +34,9 @@ def connectToRouter():
 
 
 if __name__ == "__main__":
-    connectToRouter()
+    router_ip = "192.168.10.1"
+    username = "admin"
+    password = "cisco"
+    enable_secret = "cisco"
+    port = 3080
+    connectToRouter(router_ip, username, password, port, enable_secret)
